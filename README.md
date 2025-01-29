@@ -27,7 +27,7 @@ Kaggle : https://www.kaggle.com/datasets/aashidutt3/waste-segregation-image-data
 - Containerization of the application with Docker
 
 # Main libraries Used
-numpy, matplotlib, tensorflow, keras, tf-lite, 
+numpy, matplotlib, tensorflow, keras. 
 
 
 
@@ -53,10 +53,8 @@ docker --version
 This repository contains:
 - **notebook.ipynb**: Jupyter Notebook containing the exploratory data analysis (EDA), data preprocessing, different models training, and evaluation steps.
 - **train.py**: Script to train the final and best machine learning model.
-- **predict.py**: Script for making predictions with the trained model.
-- **predict-test-request.py**: Script to test prediction requests.
-- **model.bin**: The trained model, stored in binary format.
-- **load_model_test.py**: A test script to load and validate the model from water_model.bin.
+- **predict.py**: Script for making predictions with the trained model, contains the flask app.
+- **model.keras**: The best trained model, stored in binary format.
 - **Pipfile**: Specifies the Python packages required to run the project.
 - **Pipfile.lock**: Contains exact versions of dependencies as installed in the virtual environment.
 - **Dockerfile**: The Docker configuration file. Used to containerize the application for consistent deployment.
@@ -72,12 +70,11 @@ This repository contains:
 
 3. (Optional) To run the project inside Docker, build the Docker image:
    ```bash
-   docker build -t water-potability-prediction . !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+    docker build -t waste-segregation-app .  
 4. (Optional) Run the Docker container:
    ```bash
-   docker run -p 9696:9696 water-potability-prediction    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+   docker run -p 9696:9696 waste-segregation-app
+   
 # Running the Scripts
 ### Training the Model
 
@@ -92,14 +89,16 @@ Once the model is trained, you can make predictions on new data by running the p
 ```bash
 python predict.py
 ```
-
-You can also test the prediction process by using the predict-test-request.py script.
-
-### Testing the Model
-Use load_model_test.py to load and test the model:
+You should see output indicating the Flask server is running, like:
 ```bash
-python load_model_test.py
+Running on http://127.0.0.1:5000
 ```
+Then, in a new terminal window, you can test it using curl, by providing the path to an image you have:
+```bash
+curl -X POST -F "file=@/path/to/your/image.jpg" http://localhost:5000/predict
+```
+Replace /path/to/your/image.jpg with the actual path to your test image.
+
 
 # Jupyter Notebook
 For detailed data exploration and visualization, different model training, parameter tuning, and choosing the final model, open the ``notebook.ipynb`` notebook. You can run the notebook locally in Jupyter.
@@ -110,15 +109,19 @@ If you prefer to run the application inside Docker, follow these steps:
 
 - Build the Docker image:
 ```bash
-docker build -t water-potability . !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+docker build -t waste-segregation-app .  
 ```
 
 - Run the Docker container:
 ```bash
-docker run -p 9696:9696 water-potability
+docker run -p 9696:9696 waste-segregation-app
 ```
 
 This will start a local server on port 9696, and you can make requests to the application.
+- Test with an image:
+```bash
+curl -X POST -F "file=@path_to_your_image.jpg" http://localhost:9696/predict
+```
 
 # License
 

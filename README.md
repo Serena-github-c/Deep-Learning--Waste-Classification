@@ -17,7 +17,7 @@ By accurately classifying waste, this project can help:
 
 # Dataset 
 Kaggle : https://www.kaggle.com/datasets/aashidutt3/waste-segregation-image-dataset/data
-PS: I have installed it on my local machine while creating this project, and I can't commit it because it is a huge file.
+<br>PS: I have installed it on my local machine while creating this project, and I can't commit it because it is a huge file.
 
 # Steps
 - Data Exploration, visualization, and preprocessing, including handling missing values, scaling data, and feature selection

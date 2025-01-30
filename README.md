@@ -17,7 +17,29 @@ By accurately classifying waste, this project can help:
 
 # Dataset 
 Kaggle : https://www.kaggle.com/datasets/aashidutt3/waste-segregation-image-dataset/data
-<br>PS: I have installed it on my local machine while creating this project, and I can't commit it because it is a huge file.
+<br>PS: I have installed it on my local machine while creating this project, and I can't commit it because it is a huge file.<br>
+
+### **Automatic Download**
+The dataset will be downloaded automatically when running the script.  
+Ensure you have the **Kaggle API key** set up:
+
+1. **Get Your API Key**  
+   - Sign in to [Kaggle](https://www.kaggle.com/)  
+   - Go to [Account Settings](https://www.kaggle.com/account)  
+   - Scroll to **API** → Click **Create New API Token**  
+   - This downloads a `kaggle.json` file  
+
+2. **Place the API Key**  
+   - Move `kaggle.json` to the correct location:  
+     ```sh
+     mv ~/Downloads/kaggle.json ~/.kaggle/
+     chmod 600 ~/.kaggle/kaggle.json
+     ```
+
+3. **Run the Training Script**  
+   ```sh
+   python train.py
+
 
 # Steps
 - Data Exploration, visualization, and preprocessing, including handling missing values, scaling data, and feature selection
@@ -60,6 +82,7 @@ This repository contains:
 - **Pipfile.lock**: Contains exact versions of dependencies as installed in the virtual environment.
 - **Dockerfile**: The Docker configuration file. Used to containerize the application for consistent deployment.
 - **index.html**: provides a user interface at http://localhost:9696/ where you can upload an image and get a result
+- **download_data.py** : to download the Kaggle dataset using the Kaggle API
 
 
 
@@ -102,10 +125,15 @@ python predict.py
 # Docker Usage
 
 If you prefer to run the application inside Docker, follow these steps:
+- Download the [dataset](https://www.kaggle.com/datasets/aashidutt3/waste-segregation-image-dataset/data) from Kaggle 
 
 - Build the Docker image:
 ```bash
 docker build -t waste-classifier .  
+```
+- Mount the dataset into the container:
+```bash
+docker run -v /path/to/dataset:/app/waste-segregation-dataset my-deep-learning-project
 ```
 
 - Run the Docker container:

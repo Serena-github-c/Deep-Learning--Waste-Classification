@@ -39,6 +39,7 @@ Ensure you have the **Kaggle API key** set up:
 3. **Run the Training Script**  
    ```sh
    python train.py
+   ```
 
 
 # Steps

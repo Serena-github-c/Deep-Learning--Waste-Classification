@@ -46,8 +46,7 @@ Ensure you have the **Kaggle API key** set up:
 - Data Exploration, visualization, and preprocessing, including handling missing values, scaling data, and feature selection
 - Training the Xception model with a new top, fine-tuning different parameters like the learning rate, inner layer size and dropout, and analyzing performance
 - Training a larger model and using it to make predictions
-- Transforming to tf-lite, removing tensorflow dependenciesn for a smaller model and ease of deployment
-- Deploying the best model as a web service using Waitress
+- Deploying the best model as a web service using Flask and Waitress
 - Containerization of the application with Docker
 
 # Main libraries Used

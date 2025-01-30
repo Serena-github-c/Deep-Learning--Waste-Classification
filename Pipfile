@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+tensorflow = "~=2.18.0"  # This includes keras and other TF dependencies
+numpy = "~=1.26.4"
+pillow = "~=10.2.0"      # This is the PIL package
+matplotlib = "~=3.8.3"
+flask = "~=3.0.3"
+waitress = "~=3.0.0"
+visualkeras = "~=0.1.4"
+
+[dev-packages]
+ipykernel = "*"          # Only if you're using Jupyter notebooks
+
+[requires]
+python_version = "3.11"

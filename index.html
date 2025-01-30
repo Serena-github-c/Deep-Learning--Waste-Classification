@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Segregation Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input[type="file"] {
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waste Segregation Image Classifier</h1>
+    <p>Upload an image of waste to classify it.</p>
+    
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" required>
+        <button type="submit">Upload and Classify</button>
+    </form>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData();
+            formData.append("file", document.getElementById("file").files[0]);
+
+            fetch("http://localhost:9696/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.predicted_category) {
+                    document.getElementById("result").innerHTML = 
+                        "Predicted Category: " + data.predicted_category + "<br>" +
+                        "Biodegradability: " + data.biodegradability + "<br>" +
+                        "Confidence Scores: <pre>" + JSON.stringify(data.confidence_scores, null, 2) + "</pre>";
+                } else {
+                    document.getElementById("result").innerHTML = "Error: " + data.error;
+                }
+            })
+            .catch(error => {
+                document.getElementById("result").innerHTML = "An error occurred. Please try again.";
+            });
+        });
+    </script>
+</body>
+</html>

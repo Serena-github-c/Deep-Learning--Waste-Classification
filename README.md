@@ -83,17 +83,17 @@ To train the machine learning model, run:
 ```bash
 python train.py
 ```
-This script will preprocess the data, train a model, and save it as water_model.bin.
+This script will preprocess the data, train a model, and save it as xception{epoch}-{accuracy}.keras (saving best model only)
 
 ### Making Predictions
 
-Once the model is trained, you can make predictions on new data by running the predict.py script:
+1. Once the model is trained, you can make predictions on new data by running the predict.py script:
 ```bash
 python predict.py
 ```
 
-The Flask server starts running.<br>
-Open your browser, go to : http://localhost:9696/ to see the webpage interface
+2. The Flask server starts running.<br>
+  Open your browser, go to : http://localhost:9696/ to see the webpage interface
 
 3. Upload an image to see the result
 

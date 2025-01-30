@@ -7,7 +7,10 @@ from tensorflow.keras.applications.xception import Xception, preprocess_input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout, Input
+from download_data import download_dataset
 
+# Ensure the dataset is available before training
+download_dataset()
 
 
 # Paths for datasets

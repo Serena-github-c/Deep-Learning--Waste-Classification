@@ -51,13 +51,14 @@ docker --version
   
 # Project Structure
 This repository contains:
-- **notebook.ipynb**: Jupyter Notebook containing the exploratory data analysis (EDA), data preprocessing, different models training, and evaluation steps.
+- **notebook-Xception.ipynb**: Jupyter Notebook containing the exploratory data analysis (EDA), data preprocessing, different models training, and evaluation steps.
 - **train.py**: Script to train the final and best machine learning model.
 - **predict.py**: Script for making predictions with the trained model, contains the flask app.
-- **model.keras**: The best trained model, stored in binary format.
+- **xception_299_04_0.934.keras**: The best trained model, stored in binary format.
 - **Pipfile**: Specifies the Python packages required to run the project.
 - **Pipfile.lock**: Contains exact versions of dependencies as installed in the virtual environment.
 - **Dockerfile**: The Docker configuration file. Used to containerize the application for consistent deployment.
+- **index.html**: provides a user interface at http://localhost:9696/ where you can upload an image and get a result
 
 
 
@@ -85,23 +86,17 @@ python train.py
 This script will preprocess the data, train a model, and save it as water_model.bin.
 
 ### Making Predictions
+
 Once the model is trained, you can make predictions on new data by running the predict.py script:
 ```bash
 python predict.py
 ```
-You should see output indicating the Flask server is running, like:
-```bash
-Running on http://127.0.0.1:5000
-```
-Then, in a new terminal window, you can test it using curl, by providing the path to an image you have:
-```bash
-curl -X POST -F "file=@/path/to/your/image.jpg" http://localhost:5000/predict
-```
-Replace /path/to/your/image.jpg with the actual path to your test image.
 
+The Flask server starts running.<br>
+Open your browser, go to : http://localhost:9696/ to see the webpage interface
 
-# Jupyter Notebook
-For detailed data exploration and visualization, different model training, parameter tuning, and choosing the final model, open the ``notebook.ipynb`` notebook. You can run the notebook locally in Jupyter.
+3. Upload an image to see the result
+
 
 # Docker Usage
 
@@ -109,19 +104,27 @@ If you prefer to run the application inside Docker, follow these steps:
 
 - Build the Docker image:
 ```bash
-docker build -t waste-segregation-app .  
+docker build -t waste-classifier .  
 ```
 
 - Run the Docker container:
 ```bash
-docker run -p 9696:9696 waste-segregation-app
+docker run -p 9696:9696 waste-classifier
 ```
 
-This will start a local server on port 9696, and you can make requests to the application.
+This will start a local server on port 9696<br>
+Then, in a new terminal window, you can test it using curl, by providing the path to an image you have:<br>
+
 - Test with an image:
 ```bash
 curl -X POST -F "file=@path_to_your_image.jpg" http://localhost:9696/predict
 ```
+Replace /path/to/your/image.jpg with the actual path to your test image.
+
+
+
+# Jupyter Notebook
+For detailed data exploration and visualization, different model training, parameter tuning, and choosing the final model, open the ``notebook.ipynb`` notebook. You can run the notebook locally in Jupyter.
 
 # License
 
